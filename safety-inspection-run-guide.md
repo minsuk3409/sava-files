@@ -50,7 +50,7 @@ GitHub 저장소 Settings → Pages → Build and deployment → Source를 **Git
 ## Vercel 자동 배포 (공개 데모)
 
 1. Vercel에 로그인한 뒤 **Add New → Project**에서 GitHub 저장소 `minsuk3409/sava-files`를 가져옵니다. 저장소가 보이지 않으면 Vercel GitHub 앱의 해당 저장소 접근을 허용합니다.
-2. **Root Directory**는 저장소 루트(`.`)로 유지합니다. `vercel.json`에서 Framework 없음, 별도 빌드 없음, 출력 폴더 `docs`를 설정했습니다. 환경변수나 API 키는 필요하지 않습니다.
+2. **Root Directory**는 저장소 루트(`.`)로 유지합니다. `vercel.json`에서 Framework 없음, 빌드 명령 `node scripts/build-demo.mjs`, 출력 폴더 `dist`를 설정했습니다. 환경변수나 API 키는 필요하지 않습니다.
 3. **Deploy**를 실행합니다. 프로젝트 Settings → Environments 또는 Git의 Production Branch가 `main`인지 확인합니다.
 4. 이후 `main`에 push하면 운영 배포가 자동 갱신됩니다. PR/다른 브랜치에는 Vercel 설정에 따라 미리보기 배포가 생성됩니다.
 5. Vercel이 발급한 실제 도메인에서 가상 보고서 3건, 현장 2개, 미완료 지적 2건이 표시되는지 확인합니다. 배포 도메인은 Vercel 프로젝트 화면에서 확인합니다.
@@ -58,3 +58,9 @@ GitHub 저장소 Settings → Pages → Build and deployment → Source를 **Git
 이 배포는 `docs/`의 가상 데이터 데모만 제공합니다. `safety-inspection/app.py`의 문서 업로드·DB 서버는 실행되지 않으며, 파일 업로드도 차단되어 있습니다. 인증된 사내 문서 분석 서비스를 배포하려면 별도의 운영 구성과 회사 승인이 필요합니다.
 
 GitHub Pages 배포는 별도 워크플로입니다. Vercel Git 연동 자동 배포는 GitHub Pages 설정 활성화 여부와 관계없이 동작합니다. Vercel 연결에는 계정에서 최초 1회의 GitHub 저장소 연결/프로젝트 생성이 필요하며, 토큰을 문서나 채팅에 입력하지 않습니다.
+
+### Vercel 배포 성공인데 404가 나오는 경우
+
+빌드 로그에 `Public demo built: .../dist/index.html (... bytes)`가 나오는지 확인합니다. 이 메시지가 없다면 최신 커밋 배포인지 확인합니다.
+프로젝트 Settings → Build and Deployment에서 Root Directory는 저장소 루트로 설정하고, Build Command/Output Directory의 프로젝트별 Override는 해제하여 `vercel.json`을 사용합니다. Production Branch는 `main`입니다.
+배포 상세 화면의 생성된 Deployment URL에서도 404인지 확인합니다. Deployment URL이 정상이고 대표 도메인만 404이면 Domains에서 해당 도메인이 이 프로젝트의 Production 배포에 연결되어 있는지 확인합니다.

@@ -3,3 +3,4 @@ __pycache__/
 safety-inspection/data/
 .env
 .env.*
+dist/
