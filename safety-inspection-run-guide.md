@@ -4,13 +4,18 @@
 
 ## 파일 준비
 
-이 저장소에는 실행 안내서만 저장되어 있습니다. 실행하려면 별도로 시제품 코드 `app.py`, `requirements.txt`, `static/index.html`이 필요합니다. 현재 작업 환경의 코드 위치는 `/workspace/safety-inspection`입니다. GitHub에서 이 안내서만 내려받아서는 실행할 수 없습니다.
+실행 코드는 이 저장소의 `safety-inspection/` 폴더에 함께 저장되어 있습니다.
+
+```sh
+git clone https://github.com/minsuk3409/sava-files.git
+cd sava-files/safety-inspection
+```
 
 ## 실행
 Python 3.12 이상에서:
 
 ```sh
-cd /workspace/safety-inspection  # 다른 컴퓨터에서는 코드를 저장한 폴더로 이동
+# 위에서 이동한 safety-inspection 폴더에서 실행
 python3 -m venv .venv
 .venv/bin/pip install -r requirements.txt
 .venv/bin/python app.py
@@ -31,3 +36,13 @@ python3 -m venv .venv
 
 ## 사내 적용 전 필요한 작업
 회사 승인 배포 환경, SSO/인증, 현장별 권한, 감사로그, 보관/삭제 정책, HTTPS, 파일검사, 운영 서버와 백업 구성이 필요합니다. 현재 서버는 사내 운영 또는 인터넷 공개용이 아닙니다. 승인된 사내 환경에서 보고서 양식을 검토하고 추출 규칙을 검증합니다. 보안 정책 우회를 위한 문서 변환/복사/업로드는 하지 않습니다.
+
+## 공개 데모 배포
+
+예정 주소: https://minsuk3409.github.io/sava-files/
+
+`docs/index.html`은 가상 데이터 전용 데모입니다. 실제 파일 업로드나 서버 저장은 지원하지 않습니다. Python 서버는 GitHub Pages에서 실행되지 않습니다.
+
+GitHub 저장소 Settings → Pages → Build and deployment → Source를 **GitHub Actions**로 설정합니다. 이후 Actions의 **Publish safety inspection demo** 워크플로를 실행합니다. 배포 작업이 성공한 후 위 주소에서 확인할 수 있습니다. 주소 존재만으로 배포 완료를 의미하지 않습니다.
+
+로컬 서버를 실행한 컴퓨터에서는 브라우저 주소창에 `http://127.0.0.1:3100`을 입력합니다. 사내 운영 배포 전에는 회사 승인 및 인증/권한 구현이 필요합니다.
